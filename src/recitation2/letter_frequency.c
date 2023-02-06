@@ -2,6 +2,8 @@
 
 /**
  * The main entry point for the application.
+ * 
+ * @return An exit code. This value is always 0, indicating success.
 */
 int main()
 {
@@ -23,7 +25,7 @@ int main()
     while (symbol != '\0');
     
     int i;
-    char mode = 0;
+    char mode = '\0';
     
     for (i = 1; i < 128; i++)
     {

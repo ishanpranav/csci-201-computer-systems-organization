@@ -4,6 +4,8 @@
 
 /**
 * The main entry point for the application.
+
+* @return An exit code. This value is always 0, indicating success.
 */
 int main()
 {
@@ -22,4 +24,6 @@ int main()
 		count_odd_even(minValue, maxValue, &count, &odd, &even);
 		printf("Range: %d\t-\t%d\tCount: %d\tOdd: %d\tEven: %d\n", minValue, maxValue - 1, count, odd, even);
 	}
+
+    return 0;
 }

@@ -5,7 +5,7 @@
 * Generates a pseudorandom number greater than a given value.
 *
 * @param value The exclusive lower bound of the result.
-* @returns A number greater than the given value.
+* @return A number greater than the given value.
 */
 int rand_greater_than(int value)
 {
