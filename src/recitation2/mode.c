@@ -4,13 +4,13 @@
 
 /**
  * The main entry point for the application.
-*/
+ */
 int main()
 {
     srand(time(NULL));
 
     int i;
-    int frequencies[10] = { 0 };
+    int frequencies[10] = {0};
 
     for (i = 0; i < 1000; i++)
     {
