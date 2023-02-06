@@ -12,11 +12,11 @@
  * @param month  The month, an integer between 1 and 12, inclusive.
  * @param day    The date, an integer between 1 and 31, inclusive.
  * @param hour   The hour, expressed in 24-hour time. This value must be an
- *		        integer between 0 and 23, inclusive.
+ *		         integer between 0 and 23, inclusive.
  * @param minute The minute, an integer between 0 and 59, inclusive.
  * @param second The second, an integer between 0 and 59, inclusive.
  * @return -1 if any argument is out of range; otherwise, a 32-bit integer
- *	      that represents the date/time.
+ *	       that represents the date/time.
  *
  * The four least significant bits (bits 0-3 in little-endian notation)
  * represent the "ones" digit of the second. The next four bits (0-5) represent
