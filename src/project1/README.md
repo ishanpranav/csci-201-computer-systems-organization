@@ -14,8 +14,8 @@ To compile and build individual problems run:
 
 To run simple tests on each program you can execute
 
-    ./problem1 < test1.in
-    ./problem2 < test2.in
+    ./problem1 < test1.txt
+    ./problem2 < test2.txt
     ...
 (You should test your code much more extensively than these simple test cases provided with the assignment do.)
 
