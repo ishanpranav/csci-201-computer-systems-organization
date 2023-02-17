@@ -16,15 +16,10 @@ int main()
     print_in_binary(4);
     print_in_binary(~-4);
 
-    char x;
-    
-    print_in_binary(1);
-    print_in_binary(-1);
+    char x = 0b11111110;
+    char y = 0;
 
     assert(~1 == x);
-    
-    char y;
-    
     assert(~-1 == y);
 
     part_completed(5);
