@@ -5,11 +5,6 @@
 In this set of exercises you will get some experience using the bitwise
 operators in C.
 
-### Exercises
-
-* Fill in the TODO's starting at part01.c and working your way up to part11.c
-* Submit your solution to NYU Classes as a single zip file.
-
 #### Tip
 
 To quickly compile and test your code (to see if the tests pass)
