@@ -19,7 +19,7 @@
  *	      that represents the date/time value.
  *
  * The four least significant bits (bits 0-3 in little-endian notation)
- * represent the "ones" digit of the second. The next four bits (0-5) represent
+ * represent the "ones" digit of the second. The next three bits (4-6) represent
  * the "tens" digit of the second. Bits 7-10 and 11-13 represent the "ones" and
  * "tens" digits of the minutes, respectively. Bits 14-17 represent the "ones"
  * digit of the hour. Bits 18 and 19 represent the "tens" digit of the hour.
