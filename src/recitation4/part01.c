@@ -43,7 +43,7 @@ int main()
     print_in_binary(12);
     print_in_binary(0b10000000);
     print_in_binary(right_shift(0b10000000, 1));
-    assert(right_shift(0b10000000, 1) == 0b1000000);
+    assert(right_shift(128, 1) == 0b1000000);
     part_completed(1);
 
     return 0;
