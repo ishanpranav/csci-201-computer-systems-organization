@@ -5,7 +5,15 @@
 */
 struct node
 {
+    /**
+     * Specifies the node value. 
+    */
     char *word;
+
+    /**
+     * Specifies the next node in the linked list. This value is 0 if the node
+     * is the tail of the linked list. 
+    */
     struct node *next;
 };
 
