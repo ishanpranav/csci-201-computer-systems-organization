@@ -1,29 +1,29 @@
 #include <stdio.h>
 
 /**
- * Represents a linked-list node. 
-*/
+ * Represents a linked-list node.
+ */
 struct node
 {
     /**
-     * Specifies the node value. 
-    */
+     * Specifies the node value, a pointer to a zero-terminated string.
+     */
     char *word;
 
     /**
      * Specifies the next node in the linked list. This value is 0 if the node
-     * is the tail of the linked list. 
-    */
+     * is the tail of the linked list.
+     */
     struct node *next;
 };
 
 /**
  * Adds a node to the front of a linked list.
- * 
+ *
  * @param node a pointer to a node.
  * @param head a pointer to the head of a linked-list (itself a pointer to a
- *             node). 
-*/
+ *             node).
+ */
 void addFront(struct node *node, struct node **head)
 {
     node->next = *head;
@@ -34,7 +34,7 @@ void addFront(struct node *node, struct node **head)
  * Reverses the elements of the linked list.
  *
  * @param head a pointer to the head of a linked-list (itself a pointer to a
- *             node). 
+ *             node).
  */
 void reverse(struct node **head)
 {
@@ -85,9 +85,9 @@ void reverse(struct node **head)
 /**
  * Prints a textual representation of a linked-list to the standard output
  * stream.
- * 
- * @param current a pointer to the node from which to begin printing the list. 
-*/
+ *
+ * @param current a pointer to the node from which to begin printing the list.
+ */
 void printNodes(struct node *current)
 {
     while (current != 0)
@@ -103,48 +103,49 @@ void printNodes(struct node *current)
  * Swaps the middle two elements of a linked list.
  *
  * @param head a pointer to the head of a linked-list (itself a pointer to a
- *             node). 
+ *             node).
  */
 void swapMiddle(struct node **head)
 {
-    if (*head == NULL || (*head)->next == NULL || (*head)->next->next == NULL)
-    {
-        return;
-    }
-
-    // Step 1: Find the middle element
-
-    //  Floyd's cycling finding algorithm: technique to find the middle
+    //  Floyd's cycle-finding algorithm: technique to find the middle
     //  The 'slow' pointer iterates over every node; the 'fast' pointer
     //  iterates over every other node. When the 'fast' pointer reaches
     //  the end, the 'slow'  pointer must have reached the middle.
+    
+    struct node *slow = *head;
+    struct node *fast = *head;
 
-    struct node *middleLeft = NULL;
-    struct node *middleRight = *head;
-    struct node *current = *head;
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
 
-    if (middleRight == NULL || current == NULL)
+    // There are an odd number of nodes
+
+    if (fast == NULL)
     {
         return;
     }
 
-    while (current != NULL && current->next != NULL)
+    // Find the previous node
+
+    struct node *previous = *head;
+    struct node *current = *head;
+
+    while (current != slow)
     {
-        middleLeft = middleRight;
-        middleRight = middleRight->next;
-        current = current->next->next;
+        previous = current;
+        current = current->next;
     }
 
-    if (middleLeft == NULL)
-    {
-        *head = middleRight->next;
-    }
-    else
-    {
-        middleLeft->next = middleRight->next;
-    }
+    // Perform the swap
     
-    middleRight->next = middleLeft;
+    struct node *next = current->next;
+    
+    current->next = slow->next;
+    slow->next = next;
+    previous->next = slow;
 }
 
 /**
