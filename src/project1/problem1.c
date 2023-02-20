@@ -1,3 +1,7 @@
+// Author: Ishan Pranav
+// Copyright (c) 2023 Ishan Pranav. All rights reserved. 
+// Licensed under the MIT License. 
+
 #include <stdio.h>
 
 /* Specifies an invalid date. */
@@ -16,7 +20,7 @@
  * @param minute The minute, an integer between 0 and 59 (inclusive).
  * @param second The second, an integer between 0 and 59 (inclusive).
  * @return -1 if any argument is out of range; otherwise, a 32-bit integer
- *	      that represents the date/time value.
+ *	       that represents the date/time value.
  *
  * The four least significant bits (bits 0-3 in little-endian notation)
  * represent the "ones" digit of the second. The next three bits (4-6) represent
@@ -30,6 +34,8 @@
  */
 int convert_date(int month, int day, int hour, int minute, int second)
 {
+    // Guard against arguments out of range
+
     if (month < 1 || month > 12 ||
         day < 1 || day > 31 ||
         hour < 0 || hour > 23 ||
@@ -38,6 +44,8 @@ int convert_date(int month, int day, int hour, int minute, int second)
     {
         return INVALID;
     }
+
+    // Shift each value into the correct position (little endian)
 
     return (second % 10) | ((second / 10) << 4) |
            ((minute % 10) << 7) | ((minute / 10) << 11) |
@@ -71,6 +79,8 @@ int main()
         int minute;
         int second;
 
+        // Scan values in the form MM/dd hh:mm:ss
+
         if (!scanf("%d/%d %d:%d:%d", &month, &day, &hour, &minute, &second))
         {
             printf(INVALID_MESSAGE);
@@ -80,12 +90,16 @@ int main()
 
         int value = convert_date(month, day, hour, minute, second);
 
+        // Guard against invalid results
+
         if (value == INVALID)
         {
             printf(INVALID_MESSAGE);
 
             continue;
         }
+
+        // Print the converted date as a decimal integer
 
         printf("%d\n", value);
     }

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * Represents a linked-list node.
+ * Represents a linked-list node. 
 */
 struct node
 {
@@ -107,7 +107,7 @@ void printNodes(struct node *current)
  */
 void swapMiddle(struct node **head)
 {
-    if (head == NULL)
+    if (*head == NULL || (*head)->next == NULL || (*head)->next->next == NULL)
     {
         return;
     }
@@ -116,9 +116,8 @@ void swapMiddle(struct node **head)
 
     //  Floyd's cycling finding algorithm: technique to find the middle
     //  The 'slow' pointer iterates over every node; the 'fast' pointer
-    //  iterates over every other node. When the 'fast' (current) pointer
-    //  reaches the end, the 'slow' (middleRight) pointer must have reached
-    //  the middle (or the value to the right of it).
+    //  iterates over every other node. When the 'fast' pointer reaches
+    //  the end, the 'slow'  pointer must have reached the middle.
 
     struct node *middleLeft = NULL;
     struct node *middleRight = *head;
@@ -136,29 +135,15 @@ void swapMiddle(struct node **head)
         current = current->next->next;
     }
 
-    // Step 2: Swap the middle elements (left and right)
-
     if (middleLeft == NULL)
     {
-        // *[middleRight] -> [middleRight.next] ...
-
-        //  [middleRight]
-        // *[middleRight.next] ...
-
         *head = middleRight->next;
     }
     else
     {
-        // ... -> [middleLeft] -> [middleRight] -> [middleRight.next] -> [next] ...
-
-        // [middleRight]
-        // ... -> [middleLeft] -> [middleRight.next] -> [next] ...
-
         middleLeft->next = middleRight->next;
     }
-
-    // ... -> [middleRight] -> [middleLeft] -> [middleRight.next] -> [next]
-
+    
     middleRight->next = middleLeft;
 }
 

@@ -1,7 +1,3 @@
-# Makefile for project 1
-#
-# You should not need to modify this file.
-
 CC		= gcc
 
 CFLAGS		= -g  -Wall
