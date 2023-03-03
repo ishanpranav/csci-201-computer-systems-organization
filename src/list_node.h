@@ -18,17 +18,26 @@ struct ListNode
 /**
  * Adds a node to the front of a linked list.
  *
- * @param node a pointer to a node.
+ * @param node a pointer to a node
  * @param head a pointer to the head of a linked list (itself a pointer to a
- *             node).
+ *             node)
  */
 void list_node_push(struct ListNode *node, struct ListNode **head);
+
+/**
+ * Removes a node from the front of the linked list.
+ * 
+ * @param node a pointer to the node removed
+ * @param head a pointer to the head of a linked list (itself a pointer to a
+ *             node)
+*/
+struct ListNode *list_node_pop(struct ListNode **head);
 
 /**
  * Reverses the elements of the linked list.
  *
  * @param head a pointer to the head of a linked list (itself a pointer to a
- *             node).
+ *             node)
  */
 void list_node_reverse(struct ListNode **head);
 
@@ -36,7 +45,7 @@ void list_node_reverse(struct ListNode **head);
  * Prints a textual representation of a linked list to the standard output
  * stream.
  *
- * @param current a pointer to the node from which to begin printing the list.
+ * @param current a pointer to the node from which to begin printing the list
  */
 void list_node_print(struct ListNode *current);
 
@@ -44,14 +53,14 @@ void list_node_print(struct ListNode *current);
  * Swaps the middle two elements of a linked list.
  *
  * @param head a pointer to the head of a linked list (itself a pointer to a
- *             node).
+ *             node)
  */
 void list_node_swap_medians(struct ListNode **head);
 
 /**
  * Moves the first node of a linked list to the end, making it the last node.
- * 
+ *
  * @param head a pointer to the head of a linked list (itself a pointer to a
  *             node)
-*/
+ */
 void list_node_shift(struct ListNode **head);

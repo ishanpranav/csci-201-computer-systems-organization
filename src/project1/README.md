@@ -23,7 +23,7 @@ To remove all previously compiled and built files, run
 
     make clean
 
-## Programming requirements:
+## Programming requirements
 
 - The programs should be leak-free: any memory that is allocated should be freed before the program terminates. (Although in this project, there should not be a need to allocate any memory. )
 - The programs have to be documented! Any file that you edit should have preamble including your name as the author, description of the purpose of the program and inline comments in the functions that you implement. All functions except for `main()` should have descriptions of function parameters, returned value and a summary of what the function does.__
