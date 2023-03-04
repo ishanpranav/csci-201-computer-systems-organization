@@ -3,8 +3,8 @@
 
 /**
  * Determines if the given value uses special-value encoding.
- * 
- * This method assumes that the int and float data types have the same size.
+ *
+ * This function assumes that the int and float data types have the same size.
  *
  * @param value the floating-point number to test
  * @return a non-zero integer if the given value uses special-value encoding;
@@ -12,53 +12,38 @@
  */
 int is_special(float value);
 
-/*
- * Computes and return the value of M (fractional part) of
- * IEEE single precision floating point number.
+/**
+ * Computes the mantissa of a given IEEE single-precision floating-point
+ * number.
  *
- * Parameters:
- *  f - floating point number to extract the mantissa from
- * Return value:
- *  the mantissa of f. If f is a special value, this function should return
- * 0.0 to indicate that f is either +INFINITY or -INFINITY
- * and any other non-zero value to indicate that f is +NAN or -NAN.
+ * This function assumes that the int and float data types have the same size.
  *
- * Assumption sizeof(int) = sizeof(float).
- *
+ * @param value the floating-point number from which to extract the mantissa
+ * @return the mantissa of the given value, 0 if the given value is negative
+ *         infinity or positive infinity, or any other non-zero value if the
+ *         given value is not a number.
  */
-float get_M(float f);
+float get_M(float value);
 
-/*
- * Computes and return the value of s (sign) of
- * IEEE single precision floating point number.
+/**
+ * Computes the sign of the given IEEE single-precision floating-point number.
  *
- * Parameters:
- *  f - floating point number to extract the sign from
- * Return value:
- *  -1 to indicate negative or +1
- * to indicate positive
+ * This function assumes that the int and float data types have the same size.
  *
- * Assumption sizeof(int) = sizeof(float).
- * The value returned is -1 to indicate negative or +1
- * to indicate positive.
+ * @param value the floating-point number from which to extract the sign
+ * @return -1 if the given value is negative; otherwise 1.
  */
-int get_s(float f);
+int get_s(float value);
 
-/*
- * Computes and return the value of E (exponent) of
- * IEEE single precision floating point number.
+/**
+ * Computes the exponent of the given IEEE single-precision floating-point
+ * number.
  *
- * Parameters:
- *  f - floating point number to extract the exponent from
- * Return value:
- *  the value of the exponent
+ * This function assumes that the int andfloat data types have the same size.
  *
- * Assumption sizeof(int) = sizeof(float).
+ * @param value the floating-point number from which to extract the exponent
+ * @return the exponent of the given value
  */
 int get_E(float f);
-
-///////////////////////////////////
-// Add other declarations below. //
-///////////////////////////////////
 
 #endif

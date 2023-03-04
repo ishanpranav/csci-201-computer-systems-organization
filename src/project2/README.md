@@ -93,7 +93,7 @@ park rabbit
 
 
 ```
-(notice that the last two lines of the output are blanks!).
+Notice that the last two lines of the output are blanks.
 
 __Deliverables:__
 
