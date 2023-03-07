@@ -1,3 +1,7 @@
+// Author: Ishan Pranav
+// Copyright (c) 2023 Ishan Pranav. All rights reserved. 
+// Licensed under the MIT License. 
+
 #ifndef FLOAT_H_
 #define FLOAT_H_
 
@@ -39,7 +43,7 @@ int get_s(float value);
  * Computes the exponent of the given IEEE single-precision floating-point
  * number.
  *
- * This function assumes that the int andfloat data types have the same size.
+ * This function assumes that the int and float data types have the same size.
  *
  * @param value the floating-point number from which to extract the exponent
  * @return the exponent of the given value
