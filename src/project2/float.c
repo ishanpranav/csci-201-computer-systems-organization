@@ -1,6 +1,6 @@
 // Author: Ishan Pranav
-// Copyright (c) 2023 Ishan Pranav. All rights reserved. 
-// Licensed under the MIT License. 
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
 
 #include <assert.h>
 #include <math.h>
@@ -9,17 +9,6 @@
 #include <string.h>
 #include "float.h"
 
-/**
- * Specifies a 23-bit number with all bits set. This mask yields the mantissa
- * of a 32-bit IEEE single-precision number.
- */
-#define MANTISSA_MASK 0x7fffff
-
-/**
- * 
- */
-#define EXPONENT_MASK
-
 int is_special(float value)
 {
     return 0;
@@ -27,25 +16,26 @@ int is_special(float value)
 
 float get_M(float value)
 {
-    assert(sizeof(float) == sizeof(int));
+    unsigned int mantissa = *((unsigned int *)&value) & 0x7fffffu;
 
-    int buffer;
+    mantissa |= 0x3f800000u;
 
-    memcpy(&buffer, &value, sizeof(value));
-
-    return 0.0;
+    return *((float*)&mantissa);
 }
 
 int get_s(float value)
 {
-    assert(sizeof(float) == sizeof(int));
-
-    return 0;
+    if (value < 0)
+    {
+        return -1;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 int get_E(float value)
 {
-    assert(sizeof(float) == sizeof(int));
-
     return 0;
 }
