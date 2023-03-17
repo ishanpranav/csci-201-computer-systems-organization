@@ -38,16 +38,12 @@ and outputs the results to the standard output stream.
 
 The program accepts the following instructions:
 
-- `a value` and the `value` to the tree
-- `s` remove the smallest value stored in the current tree (should have no effect
+- `a value` adds the `value` to the tree
+- `s` removes the smallest value stored in the current tree (should have no effect
   if the current tree is empty)
-- `l` remove the largest value stored in the current tree (should have no effect
+- `l` removes the largest value stored in the current tree (should have no effect
   if the current tree is empty)
-- `p` print the values stored in the current tree in order of the inorder traversal
-
-The `main` function in `problem1.c` reads and parses the input stream and calls
-appropriate functions to perform the instructions. __Your task is to implement
-those functions so that the output produced is correct.__
+- `p` prints the values stored in the current tree in order of the inorder traversal
 
 __Example__
 
@@ -102,24 +98,20 @@ declarations to the file `bst.h` (you have to upload the modified
   file if you do so).
 ## Problem 2
 This program performs basic operations on floating point numbers to illustrate
-how they are encoded using the IEEE754 standard.
+how they are encoded using the IEEE 754 standard.
 It reads a sequence of floating point numbers from the standard input stream
 and outputs the results to the standard output stream.
 The input is terminated by a zero.
 
-Recall the IEEE754 encoding for the floating point numbers represented using
+Recall the IEEE 754 encoding for the floating point numbers represented using
 32 bits (`float` type in C).
 
 Your task is to _disassemble_ a floating point number into three separate components:
-- `s` sign (either 1 or -1)
-- `E` exponent
-- `M` mantissa/significand
+- $s$: sign (either 1 or -1)
+- $E$: exponent
+- $M$: mantissa/significand
 
-The floating point number should then be equal to the product of s * M * 2^(E).
-
-The `main` function in `problem2.c` reads and parses the input stream and calls
-appropriate functions to perform the _disassembly_. __Your task is to implement
-those functions so that the output produced is correct.__
+The floating point number should then be equal to the product $(s)(M)(2^E)$.
 
 __Example__
 
