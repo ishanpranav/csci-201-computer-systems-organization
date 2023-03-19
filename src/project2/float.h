@@ -48,6 +48,6 @@ int get_s(float value);
  * @param value the floating-point number from which to extract the exponent
  * @return the exponent of the given value
  */
-int get_E(float f);
+int get_E(float value);
 
 #endif

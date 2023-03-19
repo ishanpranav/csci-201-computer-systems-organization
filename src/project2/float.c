@@ -2,25 +2,51 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-#include <assert.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "float.h"
+
+/**
+ * 
+*/
+typedef enum exponent
+{
+    /**
+     * 
+    */
+    EXPONENT_DENORMALIZED = 0,
+
+    /**
+     * 
+    */
+    EXPONENT_SPECIAL = 255
+} exponent;
+
+/**
+ * 
+*/
+static exponent get_exponent(float value)
+{
+    return ((*((unsigned int *)&value) & 0x7f800000) >> 23);
+}
 
 int is_special(float value)
 {
-    return 0;
+    return get_exponent(value) == EXPONENT_SPECIAL;
 }
 
 float get_M(float value)
 {
-    unsigned int mantissa = *((unsigned int *)&value) & 0x7fffffu;
+    unsigned int mantissa = (*((unsigned int *)&value) & 0x7fffff) | 0x3f800000u;
+    float result = *((float *)&mantissa);
+    
+    switch (get_exponent(value))
+    {
+    case EXPONENT_DENORMALIZED:
+    case EXPONENT_SPECIAL:
+        return result - 1;
 
-    mantissa |= 0x3f800000u;
-
-    return *((float*)&mantissa);
+    default:
+        return result;
+    }
 }
 
 int get_s(float value)
@@ -37,5 +63,17 @@ int get_s(float value)
 
 int get_E(float value)
 {
-    return 0;
+    exponent exponent = get_exponent(value);
+
+    switch (exponent)
+    {
+    case EXPONENT_DENORMALIZED:
+        return -126;
+
+    case EXPONENT_SPECIAL:
+        return EXPONENT_SPECIAL;
+
+    default:
+        return exponent - 127;
+    }
 }
