@@ -11,17 +11,18 @@
 typedef struct bst_node
 {
     /**
-     *
+     * Specifies a pointer to the first character of a zero-terminated string
+     * value of the node.
      */
     char *data;
 
     /**
-     *
+     * Specifies a pointer to the right child node.
      */
     struct bst_node *right;
 
     /**
-     *
+     * Specifies a pointer to the left child node.
      */
     struct bst_node *left;
 } bst_node;

@@ -11,7 +11,7 @@
  * This function assumes that the int and float data types have the same size.
  *
  * @param value the floating-point number to test
- * @return a non-zero integer if the given value uses special-value encoding;
+ * @return A non-zero integer if the given value uses special-value encoding;
  *         otherwise, false.
  */
 int is_special(float value);
@@ -23,7 +23,7 @@ int is_special(float value);
  * This function assumes that the int and float data types have the same size.
  *
  * @param value the floating-point number from which to extract the mantissa
- * @return the mantissa of the given value, 0 if the given value is negative
+ * @return The mantissa of the given value, 0 if the given value is negative
  *         infinity or positive infinity, or any other non-zero value if the
  *         given value is not a number.
  */
@@ -46,7 +46,7 @@ int get_s(float value);
  * This function assumes that the int and float data types have the same size.
  *
  * @param value the floating-point number from which to extract the exponent
- * @return the exponent of the given value
+ * @return The exponent of the given value.
  */
 int get_E(float value);
 
