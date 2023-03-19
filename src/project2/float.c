@@ -10,12 +10,12 @@
 /**
  * Re-interprets a given value as a value of another given type, without
  * casting or converting the value.
- * 
+ *
  * For example, re-interpreting a `float` as an `unsigned int` creates a
  * pointer to the identifier (`float *`), casts it to a pointer of the target
  * type (`unsigned int *`), then dereferences the pointer. The resulting value
- * is the integer representation of the original span of memory.
-*/
+ * is the unsigned integer representation of the original span of memory.
+ */
 #define reinterpret(type, identifier) *((type *)&identifier)
 
 /**
@@ -37,7 +37,7 @@ typedef enum exponent
 
 /**
  * Gets the exponent of the given IEEE single-precision floating point value.
- * 
+ *
  * @param value the floating-point number
  * @return An unsigned exponent between 0 and 255.
  */
@@ -72,7 +72,7 @@ float get_M(float value)
     unsigned int mantissa = raw | 0x3f800000;
 
     // Isolate the original exponent and branch based on the encoding type
-    
+
     switch (get_exponent(value))
     {
     case EXPONENT_DENORMALIZED:
@@ -102,14 +102,17 @@ float get_M(float value)
 
     default:
         // Normalized encoding: Preserve the leading 1 in the mantissa.
-        
+
         return reinterpret(float, mantissa);
     }
 }
 
 int get_s(float value)
 {
-    if (value < 0)
+    // Mask 0x80000000
+    // Yields the sign bit. An unsigned mask allows all 32 bits.
+
+    if (reinterpret(unsigned int, value) & 0x80000000u)
     {
         return -1;
     }
@@ -122,7 +125,7 @@ int get_s(float value)
 int get_E(float value)
 {
     // Isolate the original exponent and branch based on the encoding type
-    
+
     exponent raw = get_exponent(value);
 
     switch (raw)
