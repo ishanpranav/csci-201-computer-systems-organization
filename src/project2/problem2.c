@@ -10,9 +10,9 @@
  * DO NOT MODIFY THIS FILE
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include "float.h"
 
 int main()
