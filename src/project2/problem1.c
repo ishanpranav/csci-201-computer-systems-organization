@@ -1,7 +1,3 @@
-// Author: Ishan Pranav
-// Copyright (c) 2023 Ishan Pranav. All rights reserved. 
-// Licensed under the MIT License. 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
