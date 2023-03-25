@@ -9,10 +9,10 @@ __problem2:
     # OUTPUT:
     #   The return value is contained in `%eax`.
 
-    movl    (%rsi)         ,  %eax
+    movl    (%rsi),           %eax
     leal    (%rax, %rax, 2),  %eax
-    leal -4 (%rax)         ,  %edx
-    movl     %edx          , (%rdi)
-    addl    $3             ,  %edx
-    movl     %edx          , (%rsi)
+    leal -4 (%rax),           %edx
+    movl     %edx,           (%rdi)
+    addl    $3,               %edx
+    movl     %edx,           (%rsi)
     ret

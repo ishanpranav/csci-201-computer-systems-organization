@@ -11,6 +11,6 @@ __problem1:
 
     movl    (%rdi),  %edx
     leal  2 (%rdx),  %eax
-    imull    %eax ,  %edx
-    movl     %edx , (%rsi)
+    imull    %eax,   %edx
+    movl     %edx,  (%rsi)
     ret
