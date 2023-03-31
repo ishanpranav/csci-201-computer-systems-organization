@@ -3,9 +3,8 @@ CFLAGS	= -Wall
 
 all: \
 	problem1 \
-	problem2 \
-	problem3
-
+	problem2
+	
 problem1: \
 	problem1.c \
 	problem1.s
@@ -18,11 +17,5 @@ problem2: \
 
 	$(CC) $(CFLAGS) -o $@ $@.c $@.s
 
-problem3: \
-	problem3.c \
-	problem3.s
-	
-	$(CC) $(CFLAGS) -o $@ $@.c $@.s
-
 clean:
-	rm -f *~ *.o a.out core problem1 problem2 problem3
+	rm -f *~ *.o a.out core problem1 problem2
