@@ -25,7 +25,7 @@ int main()
     scanf("%d %d", &x1, &y1);
 
     int x2 = x1;
-    int y2 = y2;
+    int y2 = y1;
     int result1 = problem2(&x1, &y1);
     int result2 = __problem2(&x2, &y2);
 

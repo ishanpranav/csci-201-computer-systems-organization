@@ -33,12 +33,15 @@ static int problem2(long *xp, long *yp, long *zp)
  */
 int main()
 {
-    long a1 = 3;
-    long a2 = 3;
-    long b1 = 8;
-    long b2 = 8;
-    long c1 = 1;
-    long c2 = 1;
+    long a1;
+    long b1;
+    long c1;
+
+    scanf("%ld %ld %ld", &a1, &b1, &c1);
+
+    long a2 = a1;
+    long b2 = b1;
+    long c2 = c1;
     int result1 = problem2(&a1, &b1, &c1);
     int result2 = __problem2(&a2, &b2, &c2);
 
