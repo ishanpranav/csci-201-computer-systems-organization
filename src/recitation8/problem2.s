@@ -18,10 +18,11 @@ __problem2:
     cmpq     %rax,           %rdx
     jg      .L5
     leaq    (%rcx, %rcx, 2), %rdx
-    cmpq    $6,              %rdx
-    jg      .L6
-    movl    $3,              %eax
-    jmp     .L3
+
+    cmpq $6, %rdx
+    jg   .L6
+    movl $3, %eax
+    jmp  .L3
 .L5:
     leaq -12 (%rax, %rax, 2), %rcx
 .L3:
@@ -29,7 +30,7 @@ __problem2:
     movq  %rax, (%rsi)
     movl  $5,    %edx
     subq  %rcx,  %rdx
-    imull %edx, %eax
+    imull %edx,  %eax
     ret
 .L6:
     movl $2, %ecx
