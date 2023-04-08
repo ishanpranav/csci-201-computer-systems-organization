@@ -25,15 +25,6 @@ struct ListNode
 void list_node_push(struct ListNode *node, struct ListNode **head);
 
 /**
- * Removes a node from the front of the linked list.
- * 
- * @param node a pointer to the node removed
- * @param head a pointer to the head of a linked list (itself a pointer to a
- *             node)
-*/
-struct ListNode *list_node_pop(struct ListNode **head);
-
-/**
  * Reverses the elements of the linked list.
  *
  * @param head a pointer to the head of a linked list (itself a pointer to a

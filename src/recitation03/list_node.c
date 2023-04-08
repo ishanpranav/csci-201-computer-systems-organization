@@ -7,11 +7,6 @@ void list_node_push(struct ListNode *node, struct ListNode **head)
     *head = node;
 }
 
-struct ListNode* list_nde_pop(struct ListNode **head)
-{
-    
-}
-
 void list_node_reverse(struct ListNode **head)
 {
     if (head == NULL)
