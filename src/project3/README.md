@@ -24,7 +24,7 @@ To remove all previously compiled and built files, run
 (It is a good idea to run `make clean` before you commit and push the files to the remote repository so that you are
   not copying binaries from one platform to the other.)
 
-## Programming requirements:
+## Programming requirements
 
 - The programs should be leak-free: any memory that is allocated should be freed before the program terminates.
 - The programs have to be documented! Any file that you edit should have preamble
