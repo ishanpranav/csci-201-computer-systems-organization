@@ -1,6 +1,5 @@
 CC		= gcc
-
-CFLAGS		= -g  -Wall
+CFLAGS	= -g  -Wall
 
 all: problem1 problem2 problem3
 
@@ -12,7 +11,6 @@ problem2: problem2.c
 
 problem3: problem3.c
 	$(CC) $(CFLAGS) -o problem3 problem3.c
-
 
 clean:
 	rm -f *~ *.o a.out core problem1 problem2 problem3

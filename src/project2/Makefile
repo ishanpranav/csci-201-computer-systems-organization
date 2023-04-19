@@ -1,12 +1,6 @@
-# Makefile for project 2
-#
-# You should not need to modify this file.
-
 CC		= gcc
-
-CFLAGS		= -g  -Wall -std=c99
-
-CLIBS		= -lm 
+CFLAGS	= -g  -Wall -std=c99
+CLIBS	= -lm 
 
 all: problem1 problem2
 
@@ -27,7 +21,6 @@ run_problem1: problem1
 
 run_problem2: problem2
 	./problem2 < test2.in
-
 
 clean:
 	rm -f *~ *.o a.out core problem1 problem2
