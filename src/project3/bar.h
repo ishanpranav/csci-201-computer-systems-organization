@@ -1,3 +1,7 @@
+// Author: Ishan Pranav
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
 /**
  * Performs a mystery function on two arguments and returns the result.
  *

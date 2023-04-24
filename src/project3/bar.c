@@ -4,7 +4,6 @@
 
 #include "bar.h"
 
-
 long bar(long a, long b)
 {
     long rdx = a;         // mov %rdi, %rdx
