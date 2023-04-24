@@ -4,13 +4,7 @@
 
 #include "bar.h"
 
-/**
- * Performs a mystery function on two arguments and returns the result.
- *
- * @param a the first argument
- * @param b the second argument
- * @return The result of the function.
- */
+
 long bar(long a, long b)
 {
     long rdx = a;         // mov %rdi, %rdx
