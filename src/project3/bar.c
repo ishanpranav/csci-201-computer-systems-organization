@@ -1,20 +1,34 @@
+// Author: Ishan Pranav
+// Copyright (c) 2023 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
 #include "bar.h"
 
+/**
+ * Performs a mystery function on two arguments and returns the result.
+ *
+ * @param a the first argument
+ * @param b the second argument
+ * @return The result of the function.
+ */
 long bar(long a, long b)
 {
-    long rdx = a;
-    long result = 0;
-    long rcx = 11 * a;
+    long rdx = a;         // mov %rdi, %rdx
+    long result = 0;      // mov $0,   %eax
+    long rcx = 11 * a;    // lea (%rdi, %rdi, 4), %rcx 
+                          // lea (%rdi, %rcx, 2), %rcx
 
-    a = b * 16;
+    a = b * 16;           // mov %rsi, %rdi
+                          // shl $4,   %rdi
+    rcx += b * 2 - a + 1; // lea (%rcx, %rsi, 2), %rcx
+                          // sub %rdi, %rcx
+                          // add $1,   %rcx
 
-    rcx += b * 2 - a + 1;
-
-    while (rdx <= b)
+    while (rdx <= b)      // cmp %rsi, %rdx
     {
-        rdx++;
-        result += rcx;
+        rdx++;            // add $1,   %rdx
+        result += rcx;    // add %rcx, %rax
     }
 
-    return result;
+    return result;        // repz ret
 }
