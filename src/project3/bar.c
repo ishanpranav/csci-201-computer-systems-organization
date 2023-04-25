@@ -13,7 +13,7 @@ long bar(long a, long b)
 
     a = b * 16;           // mov %rsi, %rdi
                           // shl $4,   %rdi
-    rcx += b * 2 - a + 1; // lea (%rcx, %rsi, 2), %rcx
+    rcx += (b * 2) - a + 1; // lea (%rcx, %rsi, 2), %rcx
                           // sub %rdi, %rcx
                           // add $1,   %rcx
 
