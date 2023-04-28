@@ -25,7 +25,6 @@ void readLine()
                     return;
                 }
 
-                TlbEntry* tlbEntry = 
                 break;
 
             case 'P':
