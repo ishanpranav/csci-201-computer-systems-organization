@@ -8,7 +8,7 @@ problem1: problem1.c bst.o bst.h
 	$(CC) $(CFLAGS) -o problem1 problem1.c bst.o
 
 problem2: problem2.c float.o float.h
-	$(CC) $(CFLAGS) -o problem2 problem2.c float.o  $(CLIBS) 
+	$(CC) $(CFLAGS) -o problem2 problem2.c float.o $(CLIBS) 
 
 bst.o: bst.c bst.h
 	$(CC) $(CFLAGS) -c bst.c
