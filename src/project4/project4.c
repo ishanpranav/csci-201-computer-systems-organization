@@ -137,6 +137,9 @@ static void read()
 /**
  * The main entry point for the application.
  *
+ * @param count the number of command-line arguments
+ * @param args the command-line arguments. By convention, the first argument is
+ *             the program name.
  * @return An exit code. This value is always 0.
  */
 int main(int count, String args[])
