@@ -47,5 +47,5 @@ Indicates no more input of the TLB, Page Table or Cache. It is now time to promp
     Output the byte found in Hex, or "Can not be determined"
 ```
 
-__Deliverables__
+__Deliverables:__
 Implementation of the program in `project4.c` file.
