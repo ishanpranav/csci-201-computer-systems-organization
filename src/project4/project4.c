@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define DEBUG
 #define BUFFER_SIZE 32
 #define DELIMITERS ", \t\n"
 #define DEFAULT_FILE_NAME "Project4Input (1) (1) (1).txt"
