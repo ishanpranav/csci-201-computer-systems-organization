@@ -7,7 +7,6 @@
 #include <string.h>
 #define BUFFER_SIZE 32
 #define DELIMITERS ", \t\n"
-#define DEFAULT_FILE_NAME "Project4Input (1) (1) (1).txt"
 
 /**
  * Represents text as a sequence of characters.
@@ -142,22 +141,14 @@ static void read()
  */
 int main(int count, String args[])
 {
-    // If available, use the first command-line argument as the file name;
-    // otherwise, open the sample file.
-
-    String fileName;
-
-    if (count > 1)
+    if (count < 1)
     {
-        fileName = args[1];
-    }
-    else
-    {
-        fileName = DEFAULT_FILE_NAME;
+        printf("Usage: project4 <input_path>\n");
+
+        return 1;
     }
 
-    // Read from file (not standard input) as indicated by Professor
-
+    String fileName = args[1];
     FILE *streamReader = fopen(fileName, "r");
     int virtualAddress = 0;
 
