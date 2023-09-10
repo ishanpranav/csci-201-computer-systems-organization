@@ -37,4 +37,6 @@ int main()
     int tag = addressLength - (offset + index);
 
     printf("\nTag:\t%d\tbits\nIndex:\t%d\tbits\nOffset:\t%d\tbits\n", tag, index, offset);
+
+    return 0;
 }
