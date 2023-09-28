@@ -4,9 +4,6 @@
 
 #include <stdio.h>
 
-/* Specifies an invalid color. */
-#define INVALID -1
-
 /* Specifies the message displayed when parsing fails. */
 #define INVALID_MESSAGE "INVALID\n"
 
