@@ -2,6 +2,7 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved. 
 // Licensed under the MIT License. 
 
+#include <stdbool.h>
 #include <stdio.h>
 
 /**
@@ -20,7 +21,7 @@ int main()
         int j = 0;
         int an = 0;
         int bn = 0;
-        char isA = 1;
+        bool isA = 1;
 
         // Destructively iterate over the bits of N (right-shift until N is 0)
 
@@ -35,14 +36,14 @@ int main()
                     // Add a one at the j-th bit of 'an'
 
                     an |= 1 << j;
-                    isA = 0;
+                    isA = false;
                 }
                 else
                 {
                     // Add a one at the j-th bit of 'bn'
 
                     bn |= 1 << j;
-                    isA = 1;
+                    isA = true;
                 }
             }
 
