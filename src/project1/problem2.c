@@ -4,9 +4,6 @@
 
 #include <stdio.h>
 
-/* Specifies the message displayed when parsing fails. */
-#define INVALID_MESSAGE "INVALID\n"
-
 /**
  * The main entry point for the application.
  *
@@ -32,18 +29,12 @@ int main()
 
         // Scan values in the form R, G, B
 
-        if (!scanf("%d, %d, %d", &r, &g, &b))
+        if (!scanf("%d, %d, %d", &r, &g, &b) ||
+            r < 0 || r > 255 ||
+            g < 0 || g > 255 || 
+            b < 0 || b > 255)
         {
-            printf(INVALID_MESSAGE);
-
-            continue;
-        }
-
-        // Guard against invalid results
-
-        if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-        {
-            printf(INVALID_MESSAGE);
+            printf("INVALID\n");
 
             continue;
         }
