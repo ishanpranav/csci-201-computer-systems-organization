@@ -13,7 +13,7 @@ int main()
 {
     int n;
 
-    // Scan values in the form N until N is 0
+    // Scan values into N until N is 0
 
     while (scanf("%d", &n) && n)
     {
