@@ -19,9 +19,7 @@ int main()
         return 1;
     }
 
-    int i;
-
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         int r;
         int g;
