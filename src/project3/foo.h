@@ -8,4 +8,5 @@
  * @param a the first argument
  * @param b the second argument
  * @return The result of the function.
- */long foo(long a, long b);
+ */
+long foo(long a, long b);
