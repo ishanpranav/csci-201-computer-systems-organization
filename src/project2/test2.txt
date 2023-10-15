@@ -13,6 +13,6 @@
 -1e-40 
 nan 
 -nan 
-inf| 
+inf
 -inf
 0
