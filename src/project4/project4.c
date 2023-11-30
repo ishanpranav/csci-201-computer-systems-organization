@@ -37,7 +37,7 @@ struct Cache
 };
 
 /** Represents a simulated cache. */
-typedef struct Cache* Cache;
+typedef struct Cache *Cache;
 
 /**
  * Retrieves the next token from the buffered tokenizer, converted to an
@@ -54,7 +54,7 @@ static int next()
 
 /**
  * Reads and parses the next line from the buffered tokenizer.
- * 
+ *
  * @param buffer the input buffer
  * @param cache  the simulated cache
  */
