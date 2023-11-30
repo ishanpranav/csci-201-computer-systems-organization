@@ -26,7 +26,7 @@ struct CacheLine
 {
     int tag;
     Byte bytes[4];
-} CacheLine;
+};
 
 /** Represents a simulated cache. */
 struct Cache
@@ -36,7 +36,6 @@ struct Cache
     struct CacheLine lines[16];
 };
 
-/** Represents a simulated cache. */
 typedef struct Cache *Cache;
 
 /**
