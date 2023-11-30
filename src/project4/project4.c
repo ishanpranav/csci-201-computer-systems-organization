@@ -28,15 +28,15 @@ struct CacheLine
     Byte bytes[4];
 };
 
-/** Represents a simulated cache. */
-struct Cache
+/** Represents a simulated memory model. */
+struct Model
 {
     int pages[16];
     struct TlbEntry tlb[4][4];
-    struct CacheLine lines[16];
+    struct CacheLine cache[16];
 };
 
-typedef struct Cache *Cache;
+typedef struct Model *Model;
 
 /**
  * Retrieves the next token from the buffered tokenizer, converted to an
@@ -57,7 +57,7 @@ static int next()
  * @param buffer the input buffer
  * @param cache  the simulated cache
  */
-static void read(String buffer, Cache cache)
+static void read(String buffer, Model data)
 {
     String token = strtok(buffer, DELIMITERS);
 
@@ -69,10 +69,10 @@ static void read(String buffer, Cache cache)
 
         for (int i = 0; i < 4; i++)
         {
-            if (cache->tlb[index][i].physicalPageNumber == 0)
+            if (data->tlb[index][i].physicalPageNumber == 0)
             {
-                cache->tlb[index][i].tag = tag;
-                cache->tlb[index][i].physicalPageNumber = physicalPageNumber;
+                data->tlb[index][i].tag = tag;
+                data->tlb[index][i].physicalPageNumber = physicalPageNumber;
 
                 break;
             }
@@ -83,17 +83,17 @@ static void read(String buffer, Cache cache)
         int virtualPageNumber = next();
         int physicalPageNumber = next();
 
-        cache->pages[virtualPageNumber] = physicalPageNumber;
+        data->pages[virtualPageNumber] = physicalPageNumber;
     }
     else if (strcmp(token, "Cache") == 0)
     {
         int index = next();
 
-        cache->lines[index].tag = next();
+        data->cache[index].tag = next();
 
         for (int i = 0; i < 4; i++)
         {
-            cache->lines[index].bytes[i] = next();
+            data->cache[index].bytes[i] = next();
         }
     }
 }
@@ -115,7 +115,7 @@ int main(int count, String args[])
         return 1;
     }
 
-    struct Cache cache;
+    struct Model data = {0};
     char buffer[BUFFER_SIZE];
 
     String fileName = args[1];
@@ -124,7 +124,7 @@ int main(int count, String args[])
 
     while (fgets(buffer, BUFFER_SIZE, streamReader))
     {
-        read(buffer, &cache);
+        read(buffer, &data);
     }
 
     fclose(streamReader);
@@ -147,9 +147,9 @@ int main(int count, String args[])
 
         for (int i = 0; i < 4; i++)
         {
-            if (cache.tlb[tlbIndex][i].tag == tlbTag)
+            if (data.tlb[tlbIndex][i].tag == tlbTag)
             {
-                physicalPageNumber = cache.tlb[tlbIndex][i].physicalPageNumber;
+                physicalPageNumber = data.tlb[tlbIndex][i].physicalPageNumber;
 
                 break;
             }
@@ -157,17 +157,17 @@ int main(int count, String args[])
 
         if (physicalPageNumber == -1)
         {
-            physicalPageNumber = cache.pages[virtualPageNumber];
+            physicalPageNumber = data.pages[virtualPageNumber];
         }
 
-        if (cache.lines[cacheIndex].tag != physicalPageNumber)
+        if (data.cache[cacheIndex].tag != physicalPageNumber)
         {
             printf("Can not be determined\n");
 
             continue;
         }
 
-        printf("%X\n", cache.lines[cacheIndex].bytes[cacheOffset]);
+        printf("%X\n", data.cache[cacheIndex].bytes[cacheOffset]);
     }
 
     return 0;
