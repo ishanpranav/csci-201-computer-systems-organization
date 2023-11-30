@@ -67,8 +67,6 @@ static void read(String buffer, Cache cache)
         int tag = next();
         int physicalPageNumber = next();
 
-        // Brief linear search to find an empty position in the TLB set
-
         for (int i = 0; i < 4; i++)
         {
             if (cache->tlb[index][i].physicalPageNumber == 0)
@@ -82,8 +80,6 @@ static void read(String buffer, Cache cache)
     }
     else if (strcmp(token, "Page") == 0)
     {
-        // Index into the page table directly
-
         int virtualPageNumber = next();
         int physicalPageNumber = next();
 
@@ -91,8 +87,6 @@ static void read(String buffer, Cache cache)
     }
     else if (strcmp(token, "Cache") == 0)
     {
-        // Index into the cache directory
-
         int index = next();
 
         cache->lines[index].tag = next();
@@ -151,8 +145,6 @@ int main(int count, String args[])
         int cacheOffset = virtualAddress & 0x3;
         int physicalPageNumber = -1;
 
-        // Brief linear search to find a matching tag in the TLB set
-
         for (int i = 0; i < 4; i++)
         {
             if (cache.tlb[tlbIndex][i].tag == tlbTag)
@@ -165,22 +157,15 @@ int main(int count, String args[])
 
         if (physicalPageNumber == -1)
         {
-            // No matching tag discovered in the TLB
-            // Index into the virtual page table instead
-
             physicalPageNumber = cache.pages[virtualPageNumber];
         }
 
         if (cache.lines[cacheIndex].tag != physicalPageNumber)
         {
-            // Incorrect tag discovered in the cache
-
             printf("Can not be determined\n");
 
             continue;
         }
-
-        // No issues encountered
 
         printf("%X\n", cache.lines[cacheIndex].bytes[cacheOffset]);
     }
