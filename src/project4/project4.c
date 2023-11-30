@@ -8,68 +8,47 @@
 #define BUFFER_SIZE 32
 #define DELIMITERS ", \t\n"
 
-/**
- * Represents text as a sequence of characters.
- */
+/** Represents text as a zero-terminated sequence of characters. */
 typedef char *String;
 
-/**
- * Represents an 8-bit unsigned integer.
- */
+/** Represents an 8-bit unsigned integer. */
 typedef unsigned char Byte;
 
-/**
- * Represents an entry in the translation lookaside buffer (TLB).
- */
-typedef struct TlbEntry
+/** Represents an entry in the translation lookaside buffer (TLB). */
+struct TlbEntry
 {
-    /**
-     * Specifies the tag of the entry.
-     */
+    /** Specifies the tag of the entry. */
     int tag;
 
-    /**
-     * Specifies the physical page number (PPN) of the entry.
-     */
+    /** Specifies the physical page number (PPN) of the entry. */
     int physicalPageNumber;
-} TlbEntry;
+};
 
-/**
- * Represents an entry in the physical set-associative cache memory.
- */
-typedef struct CacheLine
+/** Represents an entry in the physical set-associative cache memory. */
+struct CacheLine
 {
-    /**
-     * Specifies the tag of the entry.
-     */
+    /** Specifies the tag of the entry. */
     int tag;
 
-    /**
-     * Specifies the physical bytes of cached memory.
-     */
+    /** Specifies the physical bytes of cached memory. */
     Byte bytes[4];
 } CacheLine;
 
-/**
- * Specifies the input text buffer.
- */
-char buffer[BUFFER_SIZE];
+/** Represents a simulated cache. */
+struct Cache
+{
+    /** Represents a page table. */
+    int pages[16];
 
-/**
- * Specifies an array representing the virtual page table.
- */
-int pages[16];
+    /** Represents a translation lookaside buffer (TLB). */
+    struct TlbEntry tlb[4][4];
 
-/**
- * Specifies an array representing the physical cache memory.
- */
-CacheLine cacheLines[16];
+    /** Represents a cache. */
+    struct CacheLine lines[16];
+};
 
-/**
- * Specifies a two-dimensional array representing the translation lookaside
- * buffer (TLB).
- */
-TlbEntry tlbSets[4][4];
+/** Represents a simulated cache. */
+typedef struct Cache* Cache;
 
 /**
  * Retrieves the next token from the buffered tokenizer, converted to an
@@ -77,7 +56,7 @@ TlbEntry tlbSets[4][4];
  *
  * @return The integral representation of the next buffered token.
  */
-static int nextInt()
+static int next()
 {
     String token = strtok(NULL, DELIMITERS);
 
@@ -86,25 +65,28 @@ static int nextInt()
 
 /**
  * Reads and parses the next line from the buffered tokenizer.
+ * 
+ * @param buffer the input buffer
+ * @param cache  the simulated cache
  */
-static void read()
+static void read(String buffer, Cache cache)
 {
     String token = strtok(buffer, DELIMITERS);
 
     if (!strcmp(token, "TLB"))
     {
-        int index = nextInt();
-        int tag = nextInt();
-        int physicalPageNumber = nextInt();
+        int index = next();
+        int tag = next();
+        int physicalPageNumber = next();
 
         // Brief linear search to find an empty position in the TLB set
 
         for (int i = 0; i < 4; i++)
         {
-            if (tlbSets[index][i].physicalPageNumber == 0)
+            if (cache->tlb[index][i].physicalPageNumber == 0)
             {
-                tlbSets[index][i].tag = tag;
-                tlbSets[index][i].physicalPageNumber = physicalPageNumber;
+                cache->tlb[index][i].tag = tag;
+                cache->tlb[index][i].physicalPageNumber = physicalPageNumber;
 
                 break;
             }
@@ -114,22 +96,22 @@ static void read()
     {
         // Index into the page table directly
 
-        int virtualPageNumber = nextInt();
-        int physicalPageNumber = nextInt();
+        int virtualPageNumber = next();
+        int physicalPageNumber = next();
 
-        pages[virtualPageNumber] = physicalPageNumber;
+        cache->pages[virtualPageNumber] = physicalPageNumber;
     }
     else if (!strcmp(token, "Cache"))
     {
         // Index into the cache directory
 
-        int index = nextInt();
+        int index = next();
 
-        cacheLines[index].tag = nextInt();
+        cache->lines[index].tag = next();
 
         for (int i = 0; i < 4; i++)
         {
-            cacheLines[index].bytes[i] = nextInt();
+            cache->lines[index].bytes[i] = next();
         }
     }
 }
@@ -144,12 +126,15 @@ static void read()
  */
 int main(int count, String args[])
 {
-    if (count < 1)
+    if (count < 2)
     {
         printf("Usage: project4 <input_path>\n");
 
         return 1;
     }
+
+    struct Cache cache;
+    char buffer[BUFFER_SIZE];
 
     String fileName = args[1];
     FILE *streamReader = fopen(fileName, "r");
@@ -157,7 +142,7 @@ int main(int count, String args[])
 
     while (fgets(buffer, BUFFER_SIZE, streamReader))
     {
-        read();
+        read(buffer, &cache);
     }
 
     fclose(streamReader);
@@ -182,9 +167,9 @@ int main(int count, String args[])
 
         for (int i = 0; i < 4; i++)
         {
-            if (tlbSets[tlbIndex][i].tag == tlbTag)
+            if (cache.tlb[tlbIndex][i].tag == tlbTag)
             {
-                physicalPageNumber = tlbSets[tlbIndex][i].physicalPageNumber;
+                physicalPageNumber = cache.tlb[tlbIndex][i].physicalPageNumber;
 
                 break;
             }
@@ -195,10 +180,10 @@ int main(int count, String args[])
             // No matching tag discovered in the TLB
             // Index into the virtual page table instead
 
-            physicalPageNumber = pages[virtualPageNumber];
+            physicalPageNumber = cache.pages[virtualPageNumber];
         }
 
-        if (cacheLines[cacheIndex].tag != physicalPageNumber)
+        if (cache.lines[cacheIndex].tag != physicalPageNumber)
         {
             // Incorrect tag discovered in the cache
 
@@ -209,7 +194,7 @@ int main(int count, String args[])
 
         // No issues encountered
 
-        printf("%X\n", cacheLines[cacheIndex].bytes[cacheOffset]);
+        printf("%X\n", cache.lines[cacheIndex].bytes[cacheOffset]);
     }
 
     return 0;
