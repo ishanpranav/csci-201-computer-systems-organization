@@ -62,7 +62,7 @@ static void read(String buffer, Cache cache)
 {
     String token = strtok(buffer, DELIMITERS);
 
-    if (!strcmp(token, "TLB"))
+    if (strcmp(token, "TLB") == 0)
     {
         int index = next();
         int tag = next();
@@ -81,7 +81,7 @@ static void read(String buffer, Cache cache)
             }
         }
     }
-    else if (!strcmp(token, "Page"))
+    else if (strcmp(token, "Page") == 0)
     {
         // Index into the page table directly
 
@@ -90,7 +90,7 @@ static void read(String buffer, Cache cache)
 
         cache->pages[virtualPageNumber] = physicalPageNumber;
     }
-    else if (!strcmp(token, "Cache"))
+    else if (strcmp(token, "Cache") == 0)
     {
         // Index into the cache directory
 
