@@ -17,33 +17,22 @@ typedef unsigned char Byte;
 /** Represents an entry in the translation lookaside buffer (TLB). */
 struct TlbEntry
 {
-    /** Specifies the tag of the entry. */
     int tag;
-
-    /** Specifies the physical page number (PPN) of the entry. */
     int physicalPageNumber;
 };
 
 /** Represents an entry in the physical set-associative cache memory. */
 struct CacheLine
 {
-    /** Specifies the tag of the entry. */
     int tag;
-
-    /** Specifies the physical bytes of cached memory. */
     Byte bytes[4];
 } CacheLine;
 
 /** Represents a simulated cache. */
 struct Cache
 {
-    /** Represents a page table. */
     int pages[16];
-
-    /** Represents a translation lookaside buffer (TLB). */
     struct TlbEntry tlb[4][4];
-
-    /** Represents a cache. */
     struct CacheLine lines[16];
 };
 
