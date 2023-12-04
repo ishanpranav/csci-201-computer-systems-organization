@@ -115,6 +115,7 @@ int main(int count, String args[])
         }
 
         fclose(input);
+        remove(buffer);
     }
 
     fclose(output);
