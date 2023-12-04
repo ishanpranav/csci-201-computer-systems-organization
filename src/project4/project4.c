@@ -104,7 +104,8 @@ static void read(String buffer, Model data)
  * @param count the number of command-line arguments
  * @param args the command-line arguments. By convention, the first argument is
  *             the program name.
- * @return An exit code. This value is always 0.
+ * @return An exit code. This value is 0, indicating success, or 1, indicating
+ *         a usage error.
  */
 int main(int count, String args[])
 {
@@ -119,15 +120,15 @@ int main(int count, String args[])
     char buffer[BUFFER_SIZE];
 
     String fileName = args[1];
-    FILE *streamReader = fopen(fileName, "r");
+    FILE *stream = fopen(fileName, "r");
     int virtualAddress = 0;
 
-    while (fgets(buffer, BUFFER_SIZE, streamReader))
+    while (fgets(buffer, BUFFER_SIZE, stream))
     {
         read(buffer, &data);
     }
 
-    fclose(streamReader);
+    fclose(stream);
 
     for (int round = 1; round <= 3; round++)
     {
