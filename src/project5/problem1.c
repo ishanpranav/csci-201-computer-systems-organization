@@ -21,7 +21,7 @@ typedef char *String;
  * @param buffer the buffer.
  * @param id     a unique identifier for the file.
  */
-static void name(String buffer, int id)
+static void name(char buffer[], int id)
 {
     sprintf(buffer, "%d.txt", id);
 }
