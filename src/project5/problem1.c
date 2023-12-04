@@ -2,6 +2,7 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
@@ -17,7 +18,7 @@ typedef char *String;
 /**
  * Generates a file name and writes it to the given buffer. The size of the
  * `buffer` must be at least `BUFFER_SIZE`.
- * 
+ *
  * @param buffer the buffer.
  * @param id     a unique identifier for the file.
  */
@@ -28,12 +29,12 @@ static void name(char buffer[], int id)
 
 /**
  * Performs the parallelizable task.
- * 
+ *
  * @param fileName the output file name.
  * @param min      the inclusive lower bound of the iteration.
  * @param max      the exclusive upper bound of the iteration.
  */
-static void process(String fileName, int min, int max)
+static bool process(String fileName, int min, int max)
 {
     remove(fileName);
 
@@ -41,9 +42,16 @@ static void process(String fileName, int min, int max)
     {
         FILE *stream = fopen(fileName, "a"); // sic
 
+        if (!stream)
+        {
+            return false;
+        }
+
         fprintf(stream, "%d\n", i);
         fclose(stream); // sic
     }
+
+    return true;
 }
 
 /**
@@ -61,7 +69,13 @@ int main(int count, String args[])
 
     time_t start = time(NULL);
 
-    process("sequential.txt", 1, THREADS * COUNT_PER_THREAD);
+    if (!process("sequential.txt", 1, THREADS * COUNT_PER_THREAD))
+    {
+        fprintf(stderr, "Error: I/O.\n");
+
+        return 1;
+    }
+
     fprintf(
         stdout,
         "%lld s\nParallel time elapsed: ",
@@ -100,6 +114,13 @@ int main(int count, String args[])
 
     FILE *output = fopen("parallel.txt", "w");
 
+    if (!output)
+    {
+        fprintf(stderr, "Error: I/O.\n");
+
+        return 1;
+    }
+
     for (int i = 0; i < THREADS; i++)
     {
         char buffer[BUFFER_SIZE];
@@ -108,6 +129,14 @@ int main(int count, String args[])
 
         int c;
         FILE *input = fopen(buffer, "r");
+
+        if (!input)
+        {
+            fclose(output);
+            fprintf(stderr, "Error: I/O.\n");
+
+            return 1;
+        }
 
         while ((c = fgetc(input)) != EOF)
         {

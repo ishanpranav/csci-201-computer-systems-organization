@@ -1,2 +1,3 @@
 .vscode/
 src/project5/*.txt
+*.o
