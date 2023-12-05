@@ -36,6 +36,7 @@ struct Model
     struct CacheLine cache[16];
 };
 
+/** Represents a simulated memory model. */
 typedef struct Model *Model;
 
 /**
@@ -46,9 +47,7 @@ typedef struct Model *Model;
  */
 static int next()
 {
-    String token = strtok(NULL, DELIMITERS);
-
-    return strtol(token, NULL, 16);
+    return strtol(strtok(NULL, DELIMITERS), NULL, 16);
 }
 
 /**
@@ -101,9 +100,9 @@ static void read(String buffer, Model data)
 /**
  * The main entry point for the application.
  *
- * @param count the number of command-line arguments
- * @param args the command-line arguments. By convention, the first argument is
- *             the program name.
+ * @param count the number of command-line arguments.
+ * @param args  the command-line arguments. By convention, the first argument
+ *              is the program name.
  * @return An exit code. This value is 0, indicating success, or 1, indicating
  *         a usage error.
  */

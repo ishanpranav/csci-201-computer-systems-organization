@@ -18,7 +18,7 @@ Next have the program fork and create 10 separate processes. Each process would 
 The goal is to show that by breaking up the task across processes (that do I/O), the total elapsed needed will be shorter. Make sure you choose elapsed time function in C to track time, versus CPU Clock time.
 If your program is not finding a difference between the approaches or is taking too long, you can modify the 100,000 up or down.
 ## Problem 2
-Enhance the program shown in class(and attached) to be a more robust quiz program. Have the parent program pick numbers between in some range, and an operator (+,-,*) and see if the person can answer correctly within 5 seconds If a correct answer is provided within 5 seconds, show the next question and set the timer back to 0. An incorrect answer redisplays the question. If no answer with 10 seconds, the Timer process should notify  the parent class, indicating that time is up. When time is up, add 1 to the count the number of missed questions and go to the next question. 
+Enhance the program shown in class to be a more robust quiz program. Have the parent program pick numbers between in some range, and an operator (`+`, `-`, or `*`), and see if the person can answer correctly within 5 seconds. If a correct answer is provided within 5 seconds, show the next question and set the timer back to 0. An incorrect answer redisplays the question. If no answer with 10 seconds, the timer process should notify  the parent class, indicating that time is up. When the time is up, add 1 to the count the number of missed questions and go to the next question. 
 
 You may need to notify the timer to start.
 

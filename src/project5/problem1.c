@@ -33,6 +33,7 @@ static void name(char buffer[], int id)
  * @param fileName the output file name.
  * @param min      the inclusive lower bound of the iteration.
  * @param max      the exclusive upper bound of the iteration.
+ * @return `true` if the task succeeded; otherwise, `false`.
  */
 static bool process(String fileName, int min, int max)
 {
@@ -57,9 +58,9 @@ static bool process(String fileName, int min, int max)
 /**
  * The main entry point for the application.
  *
- * @param count the number of command-line arguments
- * @param args the command-line arguments. By convention, the first argument is
- *             the program name.
+ * @param count the number of command-line arguments.
+ * @param args  the command-line arguments. By convention, the first argument
+ *              is the program name.
  * @return An exit code. This value is 0, indicating success, or 1, indicating
  *         a system error.
  */
