@@ -4,8 +4,13 @@
 #include <signal.h>
 #define N 1000000000
 
+/** Represents the current index. */
 long i;
+
+/** Represents the number of primes discovered. */
 long count = N - 1;
+
+/** Represents the number of primes discovered at the last interrupt. */
 long lastCount;
 
 /**

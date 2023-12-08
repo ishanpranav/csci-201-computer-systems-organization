@@ -42,7 +42,7 @@ int main()
 
         if (waitResult < 0)
         {
-            fprintf(stderr, "Error: wait() failed.\n");
+            fprintf(stderr, "Error: waitpid() failed.\n");
 
             return 1;
         }
