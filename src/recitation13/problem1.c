@@ -1,7 +1,25 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #define N 500000
+
+long i;
+long count = N - 1;
+long lastCount;
+
+/**
+ * Handles an interrupt signal (SIGINT)
+ *
+ * @param signal the signal code. This value is always `SIGINT`.
+ */
+void sigint(int signal)
+{
+    printf("Primes since last SIGINT: %ld\nCurrent: %ld\nTotal: %ld\n",
+           count - lastCount,
+           i,
+           count);
+}
 
 /**
  * The main entry point for the application.
@@ -10,6 +28,8 @@
  */
 int main()
 {
+    signal(SIGINT, sigint);
+
     bool *composites = calloc((N - 1), sizeof *composites);
 
     if (!composites)
@@ -21,7 +41,7 @@ int main()
 
     long end = (N + 1) / 2;
 
-    for (long i = 2; i <= end; i++)
+    for (i = 2; i <= end; i++)
     {
         if (composites[i - 2])
         {
@@ -30,20 +50,14 @@ int main()
 
         for (long j = i * 2; j <= N; j += i)
         {
+            if (composites[j - 2])
+            {
+                continue;
+            }
+
             composites[j - 2] = true;
+            count--;
         }
-    }
-
-    long count = 0;
-
-    for (long i = 2; i <= N; i++)
-    {
-        if (composites[i - 2])
-        {
-            continue;
-        }
-
-        count++;
     }
 
     printf("%ld\n", count);
