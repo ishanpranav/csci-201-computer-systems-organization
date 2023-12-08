@@ -8,7 +8,6 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include "equation.h"
 #define EQUATION_MAX_LEFT 99
 #define EQUATION_MAX_RIGHT 99
 #define EQUATION_BUFFER_SIZE 14
@@ -45,8 +44,8 @@ typedef struct Equation *Equation;
  */
 void equation_randomize(Equation instance)
 {
-    int left = rand() % MAX_VALUE;
-    int right = rand() % MAX_VALUE;
+    int left = rand() % (EQUATION_MAX_LEFT + 1);
+    int right = rand() % (EQUATION_MAX_RIGHT + 1);
     enum Operator sign = rand() % 3;
 
     switch (sign)
@@ -111,6 +110,7 @@ void equation_to_string(Equation instance, char buffer[])
  */
 int main(int count, String args[])
 {
+    printf("equation: %lu\n", sizeof(struct Equation));
     time_t start = time(NULL);
     struct Equation equation;
     char buffer[EQUATION_BUFFER_SIZE];
