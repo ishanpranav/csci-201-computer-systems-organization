@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-#define N 500000
+#define N 1000000000
 
 long i;
 long count = N - 1;
