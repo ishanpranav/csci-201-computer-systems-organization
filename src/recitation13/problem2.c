@@ -4,8 +4,14 @@
 #include <wait.h>
 #include <sys/types.h>
 
+/** Represents text as a zero-terminated sequence of characters. */
 typedef char *String;
 
+/**
+ * The main entry point for the application.
+ *
+ * @return An exit code. This value is always 0, indicating success.
+ */
 int main()
 {
     pid_t pid = fork();
