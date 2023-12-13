@@ -15,9 +15,6 @@
 /** Represents text as a zero-terminated sequence of characters. */
 typedef char *String;
 
-/** Represents a mathematical equation of the form `a ~ b = c`. */
-typedef struct Equation *Equation;
-
 pid_t pid;
 int solution;
 int incorrect;
