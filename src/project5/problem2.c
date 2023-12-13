@@ -99,9 +99,9 @@ int main(int count, String args[])
 
         if (pid == 0)
         {
-            String args[] = {"problem2Timer", NULL};
+            String childArgs[] = {"problem2Timer", NULL};
 
-            execv(args[0], args);
+            execv(childArgs[0], childArgs);
             fprintf(stderr, "Error: execv() failed.\n");
 
             return 1;
