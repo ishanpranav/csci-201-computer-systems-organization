@@ -2,6 +2,7 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+#include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +11,7 @@
 #include <sys/types.h>
 #define EQUATION_MAX_LEFT 99
 #define EQUATION_MAX_RIGHT 99
-#define EQUATION_BUFFER_SIZE 14
+#define EQUATION_BUFFER_SIZE 8
 
 /** Represents text as a zero-terminated sequence of characters. */
 typedef char *String;
@@ -34,6 +35,8 @@ struct Equation
 
 /** Represents a mathematical equation of the form `a ~ b = c`. */
 typedef struct Equation *Equation;
+
+pid_t pid;
 
 /**
  * Randomizes the current equation. This method uses `rand()`. To generate
@@ -92,11 +95,17 @@ void equation_to_string(Equation instance, char buffer[])
 
     sprintf(
         buffer,
-        "%d %c %d = %d",
+        "%d %c %d",
         instance->left,
         sign,
-        instance->right,
-        instance->solution);
+        instance->right);
+}
+
+void sigint(int signal)
+{
+    kill(pid, SIGKILL);
+    printf("Cannot reset time again - game over.\n");
+    exit(0);
 }
 
 /**
@@ -110,17 +119,17 @@ void equation_to_string(Equation instance, char buffer[])
  */
 int main(int count, String args[])
 {
-    printf("equation: %lu\n", sizeof(struct Equation));
-    time_t start = time(NULL);
+    signal(SIGINT, sigint);
+
     struct Equation equation;
     char buffer[EQUATION_BUFFER_SIZE];
 
-    srand(start);
+    srand(time(NULL));
     equation_randomize(&equation);
     equation_to_string(&equation, buffer);
-    printf("%s\n", buffer);
+    printf("What is %s\n", buffer);
 
-    pid_t pid = fork();
+    pid = fork();
 
     if (pid < 0)
     {
@@ -131,9 +140,42 @@ int main(int count, String args[])
 
     if (pid == 0)
     {
-        printf("%s\n", buffer);
+        execv("problem2Timer");
 
         return 0;
+    }
+
+    int response = equation.solution + 1;
+
+    while (response != equation.solution)
+    {
+        scanf("%d", &response);
+
+        if (response == equation.solution)
+        {
+            printf("You win.\n");
+            kill(pid, SIGKILL);
+
+            continue;
+        }
+
+        if (!response)
+        {
+            kill(pid, SIGINT);
+            printf("%i rsetting time\n", response);
+
+            continue;
+        }
+
+        if (response == -1)
+        {
+            kill(pid, SIGKILL);
+            printf("%i game over\n", response);
+
+            break;
+        }
+
+        printf("%i incorrect - try again\n", response);
     }
 
     return 0;
